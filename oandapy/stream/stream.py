@@ -1,7 +1,7 @@
 import warnings
 
 import json
-import requests
+import grequests
 from ..exceptions import BadEnvironment
 from abc import ABCMeta, abstractmethod
 
@@ -54,7 +54,7 @@ class Streamer(EndpointsMixin, object):
             raise BadEnvironment(environment)
 
         self.access_token = access_token
-        self.client = requests.Session()
+        self.client = grequests.Session()
         self.client.stream = True
         self.connected = False
 

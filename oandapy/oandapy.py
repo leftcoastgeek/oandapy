@@ -1,5 +1,5 @@
 import json
-import requests
+import grequests
 from .exceptions import BadEnvironment, OandaError
 
 """ OANDA API wrapper for OANDA's REST API """
@@ -228,7 +228,7 @@ class API(EndpointsMixin, object):
             raise BadEnvironment(environment)
 
         self.access_token = access_token
-        self.client = requests.Session()
+        self.client = grequests.Session()
 
         # personal token authentication
         if self.access_token:
@@ -264,7 +264,7 @@ class API(EndpointsMixin, object):
 
         try:
             response = func(url, **request_args)
-        except requests.RequestException as e:
+        except grequests.RequestException as e:
             print (str(e))
         content = response.content.decode('utf-8')
 
